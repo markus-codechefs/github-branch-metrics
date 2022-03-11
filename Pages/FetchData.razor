@@ -1,0 +1,48 @@
+﻿@page "/fetchdata"
+
+<PageTitle>Branch Lifespan</PageTitle>
+
+@using github_branch_lifetime.Data
+@inject BranchLifespanService BranchLifespanService
+
+<h1>Average Branch Lifespan</h1>
+
+<p>Immoscout24 Branch Lifespan</p>
+
+@if (data == null || data.Count == 0)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>CreatedAt</th>
+                <th>MergedAt</th>
+                <th>MergeCommitSha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pr in data)
+            {
+                <tr>
+                    <td>@pr.Title</td>
+                    <td>@pr.CreatedAt.ToShortDateString()</td>
+                    <td>@pr.MergedAt</td>
+                    <td>@pr.MergeCommitSha</td>                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Root>? data;
+
+    protected override async Task OnInitializedAsync()
+    {
+        data = await BranchLifespanService.GetCurrentBranchLifespan();
+    }
+}
