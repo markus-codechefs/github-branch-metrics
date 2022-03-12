@@ -21,7 +21,10 @@
     <ProjectReference Include = "../Service/github-branch-lifetime.csproj" />
 </ItemGroup>
 <ItemGroup>
-    <None Update="data.json">
+    <None Update="PRData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="CommitData.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     </ItemGroup>
