@@ -18,20 +18,18 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>CreatedAt</th>
-                <th>MergedAt</th>
-                <th>MergeCommitSha</th>
+                <th>Branch Name</th>
+                <th>Branch first commit on</th>
+                <th>PR MergedAt</th>                
             </tr>
         </thead>
         <tbody>
             @foreach (var pr in data)
             {
                 <tr>
-                    <td>@pr.Title</td>
-                    <td>@pr.CreatedAt.ToShortDateString()</td>
-                    <td>@pr.MergedAt</td>
-                    <td>@pr.MergeCommitSha</td>                    
+                    <td>@pr.Head.Ref</td>
+                    <td>@pr.Head.Sha</td>
+                    <td>@pr.MergedAt.ToShortDateString()</td>
                 </tr>
             }
         </tbody>
