@@ -9,9 +9,22 @@ namespace BranchLifeSpanTests;
 public class BranchLifeSpanTests
 {
     [Fact]
-    public void SimplePassingTest()
+    public void TestCommitDataModel()
     {
-        var json = GetJsonFile();
+        var json = GetJsonFile(@".\CommitData.json");
+
+        var result = JsonConvert.DeserializeObject<List<Commits>>(json);     
+
+        Assert.NotNull(json);
+        Assert.NotNull(result); 
+        Assert.True(result.Count > 0);
+        Assert.NotEmpty(result[0].Commit.Message);       
+    }
+
+    [Fact]
+    public void TestPRDataModel()
+    {
+        var json = GetJsonFile(@".\PRData.json");
 
         var result = JsonConvert.DeserializeObject<List<PullRequest>>(json);     
 
@@ -21,8 +34,8 @@ public class BranchLifeSpanTests
         Assert.NotEmpty(result[0].Head.Ref);       
     }
 
-    private string GetJsonFile()
+    private string GetJsonFile(string fileName)
     {
-        return File.ReadAllText(@".\data.json");
+        return File.ReadAllText(fileName);
     }
 }
