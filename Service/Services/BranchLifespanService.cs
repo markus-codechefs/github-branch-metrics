@@ -5,20 +5,25 @@ namespace github_branch_lifetime.Data;
 
 public class BranchLifespanService
 {   
-    public async Task<List<PullRequest>> GetCurrentBranchLifespan()
+    public async Task<DataViewModel> GetCurrentBranchLifespan()
     {
         //Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(data.json);
-        var client = new RestClient("https://api.github.com/repos/octocat/hello-world/pulls");
-        var request = new RestRequest();
+        var client = new RestClient("https://api.github.com");
+        
+        var request = new RestRequest("/markus-codechefs/github-branch-lifetime/pulls");
         request.AddHeader("accept", " application/vnd.github.v3+json");
 
-        var response = await client.GetAsync<List<PullRequest>>(request);
+        var prResponse = await client.GetAsync<List<PullRequest>>(request);
 
-        if(response != null) 
+        request = new RestRequest("/markus-codechefs/github-branch-lifetime/pulls/5/commits");        
+
+        var commitResponse = await client.GetAsync<Commits>(request);
+
+        if(prResponse != null && commitResponse != null)
         {
-            return response;
-        }
+            DataViewModel model = new DataViewModel(){PullRequests = prResponse, Commits = commitResponse};
+        }        
         
-        return new List<PullRequest>();        
+        return new DataViewModel();
     }
 }
