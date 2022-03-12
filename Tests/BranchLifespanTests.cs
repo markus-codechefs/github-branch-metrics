@@ -13,10 +13,12 @@ public class BranchLifeSpanTests
     {
         var json = GetJsonFile();
 
-        var result = JsonConvert.DeserializeObject<List<Root>>(json);     
+        var result = JsonConvert.DeserializeObject<List<PullRequest>>(json);     
 
         Assert.NotNull(json);
-        Assert.NotNull(result);        
+        Assert.NotNull(result); 
+        Assert.True(result.Count > 0);
+        Assert.NotEmpty(result[0].Head.Ref);       
     }
 
     private string GetJsonFile()
