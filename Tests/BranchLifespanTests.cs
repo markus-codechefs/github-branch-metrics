@@ -2,10 +2,11 @@ using Xunit;
 using Newtonsoft.Json;
 using System.IO;
 using github_branch_lifetime.Data;
+using System.Collections.Generic;
 
 namespace BranchLifeSpanTests;
 
-public class UnitTest1
+public class BranchLifeSpanTests
 {
     [Fact]
     public void SimplePassingTest()
