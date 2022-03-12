@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rKiPLMug7eXzQujOfeYlQpp6hoABxFWJ36KzvYnPAfc2DyB/HAHawmEA3jO7R6DLWt68dbXdFoktW+xdAaXJpA==",
+  "dgSpecHash": "uAWqGDqBNcqOysH2a4rjjYeYRXhh9TQNAY8HwElv0SzsGkkLGf4hnE9psy5dydeJx3vIL5UPMh8T89G9FA6N8A==",
   "success": true,
-  "projectFilePath": "D:\\Dev\\github-branch-lifetime\\BranchLifeSpanTests\\BranchLifeSpanTests.csproj",
+  "projectFilePath": "d:\\Dev\\github-branch-lifetime\\Tests\\BranchLifeSpanTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marku\\.nuget\\packages\\coverlet.collector\\3.1.0\\coverlet.collector.3.1.0.nupkg.sha512",
     "C:\\Users\\marku\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.3\\microsoft.aspnetcore.jsonpatch.6.0.3.nupkg.sha512",

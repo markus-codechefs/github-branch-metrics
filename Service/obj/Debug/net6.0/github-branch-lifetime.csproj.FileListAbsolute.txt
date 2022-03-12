@@ -1,9 +1,6 @@
-D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.csproj.AssemblyReference.cache
 D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.GeneratedMSBuildEditorConfig.editorconfig
 D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.AssemblyInfoInputs.cache
 D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.AssemblyInfo.cs
-D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.csproj.CoreCompileInputs.cache
-D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.MvcApplicationPartsAssemblyInfo.cache
 D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.RazorAssemblyInfo.cache
 D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.RazorAssemblyInfo.cs
 d:\Dev\github-branch-lifetime\Service\bin\Debug\net6.0\appsettings.Development.json
@@ -19,15 +16,4 @@ d:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\scopedcss\projectbundle\g
 d:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.csproj.CopyComplete
 D:\Dev\github-branch-lifetime\Service\bin\Debug\net6.0\github-branch-lifetime.deps.json
 D:\Dev\github-branch-lifetime\Service\bin\Debug\net6.0\github-branch-lifetime.runtimeconfig.json
-D:\Dev\github-branch-lifetime\Service\bin\Debug\net6.0\github-branch-lifetime.dll
-D:\Dev\github-branch-lifetime\Service\bin\Debug\net6.0\ref\github-branch-lifetime.dll
-D:\Dev\github-branch-lifetime\Service\bin\Debug\net6.0\github-branch-lifetime.pdb
-D:\Dev\github-branch-lifetime\Service\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
-D:\Dev\github-branch-lifetime\Service\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
-D:\Dev\github-branch-lifetime\Service\bin\Debug\net6.0\Newtonsoft.Json.dll
-D:\Dev\github-branch-lifetime\Service\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
-D:\Dev\github-branch-lifetime\Service\bin\Debug\net6.0\RestSharp.dll
-D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.dll
-D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\ref\github-branch-lifetime.dll
-D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.pdb
 D:\Dev\github-branch-lifetime\Service\obj\Debug\net6.0\github-branch-lifetime.genruntimeconfig.cache

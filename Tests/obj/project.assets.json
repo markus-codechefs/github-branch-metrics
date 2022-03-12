@@ -5912,11 +5912,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dev\\github-branch-lifetime\\BranchLifeSpanTests\\BranchLifeSpanTests.csproj",
+      "projectUniqueName": "d:\\Dev\\github-branch-lifetime\\Tests\\BranchLifeSpanTests.csproj",
       "projectName": "BranchLifeSpanTests",
-      "projectPath": "D:\\Dev\\github-branch-lifetime\\BranchLifeSpanTests\\BranchLifeSpanTests.csproj",
+      "projectPath": "d:\\Dev\\github-branch-lifetime\\Tests\\BranchLifeSpanTests.csproj",
       "packagesPath": "C:\\Users\\marku\\.nuget\\packages\\",
-      "outputPath": "D:\\Dev\\github-branch-lifetime\\BranchLifeSpanTests\\obj\\",
+      "outputPath": "d:\\Dev\\github-branch-lifetime\\Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5938,8 +5938,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj": {
-              "projectPath": "D:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj"
+            "d:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj": {
+              "projectPath": "d:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj"
             }
           }
         }

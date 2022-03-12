@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj": {}
+    "d:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj": {}
   },
   "projects": {
-    "D:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj": {
+    "d:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj",
+        "projectUniqueName": "d:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj",
         "projectName": "github-branch-lifetime",
-        "projectPath": "D:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj",
+        "projectPath": "d:\\Dev\\github-branch-lifetime\\Service\\github-branch-lifetime.csproj",
         "packagesPath": "C:\\Users\\marku\\.nuget\\packages\\",
-        "outputPath": "D:\\Dev\\github-branch-lifetime\\Service\\obj\\",
+        "outputPath": "d:\\Dev\\github-branch-lifetime\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
