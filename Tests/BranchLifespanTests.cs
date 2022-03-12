@@ -17,8 +17,8 @@ public class BranchLifeSpanTests
 
         Assert.NotNull(json);
         Assert.NotNull(result); 
-        Assert.True(result.Count > 0);
-        Assert.NotEmpty(result[0].Commit.Message);       
+        Assert.True(result?.Count > 0);
+        Assert.NotEmpty(result?[0].Commit.Message);       
     }
 
     [Fact]
@@ -30,8 +30,8 @@ public class BranchLifeSpanTests
 
         Assert.NotNull(json);
         Assert.NotNull(result); 
-        Assert.True(result.Count > 0);
-        Assert.NotEmpty(result[0].Head.Ref);       
+        Assert.True(result?.Count > 0);
+        Assert.NotEmpty(result?[0].Head.Ref);       
     }
 
     private string GetJsonFile(string fileName)
