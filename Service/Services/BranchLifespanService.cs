@@ -12,11 +12,11 @@ public class BranchLifespanService
         var request = new RestRequest();
         request.AddHeader("accept", " application/vnd.github.v3+json");
 
-        Root? response = await client.GetAsync<Root>(request);
+        var response = await client.GetAsync<List<Root>>(request);
 
         if(response != null) 
         {
-            return new List<Root>(){response};
+            return response;
         }
         
         return new List<Root>();        
