@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.IO;
 using github_branch_lifetime.Data;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BranchLifeSpanTests;
 
@@ -32,6 +33,16 @@ public class BranchLifeSpanTests
         Assert.NotNull(result); 
         Assert.True(result?.Count > 0);
         Assert.NotEmpty(result?[0].Head.Ref);       
+    }
+
+    [Fact]
+    public async Task TestBranchLifespanService()
+    {
+        BranchLifespanService service = new BranchLifespanService();
+
+        var data = await service.GetCurrentBranchLifespan();     
+
+        Assert.NotNull(data);   
     }
 
     private string GetJsonFile(string fileName)
