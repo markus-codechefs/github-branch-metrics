@@ -33,6 +33,7 @@ public class BranchLifespanService
             var commitResponse = await client.GetFromJsonAsync<List<Commits>>(branchCommits);
 
             branch.CreatedAt = commitResponse.OrderBy(c=>c.Commit.Committer.Date).FirstOrDefault().Commit.Committer.Date;
+            branch.NrOfCommits = commitResponse.Count;
 
             branches.Add(branch);
         }
