@@ -27,14 +27,15 @@ public class BranchLifespanService
         foreach (var pr in prData)
         {
             if(pr.MergedAt.Equals(DateTime.MinValue)) continue;
-            Branch branch = new Branch { Name = pr.Head.Ref, MergedAt = pr.MergedAt };
-            
+
             var branchCommits = string.Format(COMMITS, pr.Number);
             var commitResponse = await client.GetFromJsonAsync<List<Commits>>(branchCommits);
+            
+            if(commitResponse == null || commitResponse?.Count == 0) continue;
 
+            Branch branch = new Branch { Name = pr.Head.Ref, MergedAt = pr.MergedAt };
             branch.CreatedAt = commitResponse.OrderBy(c=>c.Commit.Committer.Date).FirstOrDefault().Commit.Committer.Date;
             branch.NrOfCommits = commitResponse.Count;
-
             branches.Add(branch);
         }
         return new BranchViewModel { Branches = branches };
