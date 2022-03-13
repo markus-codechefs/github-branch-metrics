@@ -1,7 +1,5 @@
 namespace github_branch_lifetime.Data;
-public class DataViewModel
+public class BranchViewModel
 {
-    public List<PullRequest> PullRequests { get; set; }
-    public Commits Commits { get; set; }
-
+    public List<Branch> Branches { get; set; }
 }
