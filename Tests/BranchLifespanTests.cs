@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System;
 using System.Net.Http.Json;
-using RestSharp;
 
 namespace BranchLifeSpanTests;
 
@@ -46,7 +45,7 @@ public class BranchLifeSpanTests
 
         var data = await service.GetCurrentBranchLifespan();
 
-        Assert.NotNull(data);
+        Assert.NotNull(data);        
     }
 
     [Fact]
