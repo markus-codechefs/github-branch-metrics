@@ -9,9 +9,13 @@
 
 <p>Immoscout24 Branch Lifespan</p>
 
-@if (model ==null || model.Branches.Count == 0)
+@if (model ==null)
 {
     <p><em>Loading...</em></p>
+}
+else if (model.Branches.Count == 0)
+{
+    <p><em>No branches exist...</em></p>
 }
 else
 {
