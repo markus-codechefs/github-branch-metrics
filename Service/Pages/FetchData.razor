@@ -9,7 +9,7 @@
 
 <p>Immoscout24 Branch Lifespan</p>
 
-@if (model.Branches.Count == 0)
+@if (model ==null || model.Branches.Count == 0)
 {
     <p><em>Loading...</em></p>
 }
@@ -18,9 +18,11 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Title</th>
                 <th>Branch Name</th>
+                <th>CreatedAt</th>   
                 <th>MergedAt</th>                
+                <th># of commits</th>
+                <th># of line changes</th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +41,7 @@ else
 }
 
 @code {
-    private BranchViewModel model;
+    private BranchViewModel? model;
 
     protected override async Task OnInitializedAsync()
     {
