@@ -5,7 +5,7 @@ public class BranchLifespanService
     public async Task<BranchViewModel> GetCurrentBranchLifespan()
     {
         const string BASE_ADDRESS = "https://api.github.com";
-        const string PULLS = "repos/markus-codechefs/github-branch-lifetime/pulls";
+        const string PULLS = "repos/markus-codechefs/github-branch-lifetime/pulls?state=all&base=master";
         
 
         HttpClient client = new HttpClient();
