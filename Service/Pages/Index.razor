@@ -24,9 +24,12 @@ else
             <tr>
                 <th>Branch Name</th>
                 <th>CreatedAt</th>   
-                <th>MergedAt</th>                
+                <th>MergedAt</th>          
+                <th>Branch age (in days)</th>          
                 <th># of commits</th>
-                <th># of line changes</th>
+                <th>Additions</th>
+                <th>Deletions</th>
+                <th>Changed files</th>
             </tr>
         </thead>
         <tbody>
@@ -36,8 +39,11 @@ else
                     <td>@branch.Name</td>                    
                     <td>@branch.CreatedAt</td>                    
                     <td>@branch.MergedAt</td>
+                    <td>@branch.AgeInDays</td>
                     <td>@branch.NrOfCommits</td>
-                    <td>@branch.NrOfLinesChanged</td>                    
+                    <td>@branch.Additions</td>                    
+                    <td>@branch.Deletions</td>                    
+                    <td>@branch.ChangedFiles</td>                    
                 </tr>
             }
         </tbody>
