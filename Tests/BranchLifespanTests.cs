@@ -57,7 +57,7 @@ public class BranchLifeSpanTests
         var response = await client.GetFromJsonAsync<List<PullRequest>>("repos/markus-codechefs/github-branch-lifetime/pulls?state=all&base=master");
 
         Assert.NotNull(response);
-        Assert.True(response?.Count > 0);
+        Assert.True(response?.Count > 0);        
     }
 
     [Fact]
