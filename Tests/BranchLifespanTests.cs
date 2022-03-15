@@ -54,7 +54,7 @@ public class BranchLifeSpanTests
         HttpClient client = new HttpClient();
         client.BaseAddress = new Uri("https://api.github.com");
         client.DefaultRequestHeaders.Add("User-Agent", "markus-codechefs");
-        var response = await client.GetFromJsonAsync<List<PullRequest>>("repos/markus-codechefs/github-branch-lifetime/pulls");
+        var response = await client.GetFromJsonAsync<List<PullRequest>>("repos/markus-codechefs/github-branch-lifetime/pulls?state=all&base=master");
 
         Assert.NotNull(response);
         Assert.True(response?.Count > 0);
