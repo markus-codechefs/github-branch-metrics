@@ -7,6 +7,6 @@ public class BranchViewModel
     }
 
     public List<Branch> Branches { get; set; }
-    public decimal AverageBranchLifespanInDaysTotal { get; set; }
-    public decimal AverageBranchLifespanInDaysLast3Months { get; set; }    
+    public double AverageBranchLifespanInDaysTotal { get; set; }
+    public double AverageBranchLifespanInDaysLast3Months { get; set; }    
 }

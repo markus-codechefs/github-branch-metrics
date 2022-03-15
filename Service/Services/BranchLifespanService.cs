@@ -16,13 +16,18 @@ public class BranchLifespanService
 
         if (prResponse == null || prResponse?.Count == 0) return new BranchViewModel();
 
-        return await CreateBranchViewModel(client, prResponse);
+        var model = await CreateBranchViewModel(client, prResponse);
+
+        model.AverageBranchLifespanInDaysTotal = model.Branches.Average(x=>x.AgeInDays);
+        model.AverageBranchLifespanInDaysLast3Months = model.Branches.Where(b=>b.CreatedAt>=DateTime.Now.AddMonths(-3)).Average(x=>x.AgeInDays);
+
+        return model;
     }
 
     private async Task<BranchViewModel> CreateBranchViewModel(HttpClient client, List<PullRequest>? prData)
     {
-        if(prData == null)  return new BranchViewModel();
-        
+        if (prData == null) return new BranchViewModel();
+
         string COMMITS = "repos/markus-codechefs/github-branch-lifetime/pulls/{0}/commits";
         string PR = "repos/markus-codechefs/github-branch-lifetime/pulls/{0}";
         List<Branch> branches = new List<Branch>();
@@ -30,14 +35,14 @@ public class BranchLifespanService
         foreach (var pr in prData)
         {
             if (pr.Draft || !pr.MergedAt.HasValue || pr.MergedAt.Equals(DateTime.MinValue)) continue;
-            
+
             Branch branch = new Branch { Name = pr.Head.Ref, MergedAt = pr.MergedAt.Value };
             branches.Add(branch);
 
-            var branchCommits = string.Format(COMMITS, pr.Number);            
+            var branchCommits = string.Format(COMMITS, pr.Number);
             var commitResponse = await client.GetFromJsonAsync<List<Commits>>(branchCommits);
 
-            if (commitResponse == null || commitResponse?.Count == 0) continue;            
+            if (commitResponse == null || commitResponse?.Count == 0) continue;
 
             var oldestCommit = commitResponse?.OrderBy(c => c.Commit.Committer.Date).FirstOrDefault();
 
@@ -46,17 +51,17 @@ public class BranchLifespanService
                 branch.CreatedAt = oldestCommit.Commit.Committer.Date;
             }
 
-            branch.AgeInDays = (branch.MergedAt - branch.CreatedAt).TotalDays;
+            branch.AgeInDays = (branch.MergedAt - branch.CreatedAt).TotalDays;            
 
             var prDetails = string.Format(PR, pr.Number);
             var prDetailsResponse = await client.GetFromJsonAsync<PullRequestDetails>(prDetails);
 
-            if(prDetailsResponse == null) continue; 
+            if (prDetailsResponse == null) continue;
 
             branch.NrOfCommits = prDetailsResponse.Commits;
             branch.Additions = prDetailsResponse.Additions;
             branch.Deletions = prDetailsResponse.Deletions;
-            branch.ChangedFiles = prDetailsResponse.ChangedFiles;            
+            branch.ChangedFiles = prDetailsResponse.ChangedFiles;
         }
 
         return new BranchViewModel { Branches = branches };
