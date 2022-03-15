@@ -4,11 +4,12 @@ namespace github_branch_lifetime.Data;
 
 public class PullRequest
 {
+    public PullRequest()
+    {
+        Head = new Head();
+    }
     public int Id { get; set; }
     public int Number { get; set; }
-    public string State { get; set; }
-    public string Title { get; set; }
-    public string Body { get; set; }
     [JsonPropertyName("created_at")]
     public DateTime CreatedAt { get; set; }
 

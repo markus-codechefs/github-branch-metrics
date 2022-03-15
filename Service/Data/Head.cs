@@ -2,6 +2,9 @@ namespace github_branch_lifetime.Data;
 
 public class Head
 {
-    public string Label { get; set; }
+    public Head()
+    {
+        Ref = "";
+    }
     public string Ref { get; set; }
 }

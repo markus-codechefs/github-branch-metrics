@@ -19,8 +19,10 @@ public class BranchLifespanService
         return await CreateBranchViewModel(client, prResponse);
     }
 
-    private async Task<BranchViewModel> CreateBranchViewModel(HttpClient client, List<PullRequest> prData)
+    private async Task<BranchViewModel> CreateBranchViewModel(HttpClient client, List<PullRequest>? prData)
     {
+        if(prData == null)  return new BranchViewModel();
+        
         string COMMITS = "repos/markus-codechefs/github-branch-lifetime/pulls/{0}/commits";
         string PR = "repos/markus-codechefs/github-branch-lifetime/pulls/{0}";
         List<Branch> branches = new List<Branch>();
