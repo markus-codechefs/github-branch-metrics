@@ -14,28 +14,34 @@ public class BranchLifespanService
 
         var prResponse = await client.GetFromJsonAsync<List<PullRequest>>(PULLS);
 
-        if (prResponse == null && prResponse.Count > 0) return new BranchViewModel();
+        if (prResponse == null || prResponse?.Count == 0) return new BranchViewModel();
 
-        return await CreateBranchViewModel(client, prResponse);
-    }
+       return await CreateBranchViewModel(client, prResponse);
+     }
 
     private async Task<BranchViewModel> CreateBranchViewModel(HttpClient client, List<PullRequest> prData)
     {
         string COMMITS = "repos/markus-codechefs/github-branch-lifetime/pulls/{0}/commits";
         List<Branch> branches = new List<Branch>();
-        
+
         foreach (var pr in prData)
         {
-            if(!pr.MergedAt.HasValue || pr.MergedAt.Equals(DateTime.MinValue)) continue;
+            if(pr.Draft || !pr.MergedAt.HasValue || pr.MergedAt.Equals(DateTime.MinValue)) continue;
 
             var branchCommits = string.Format(COMMITS, pr.Number);
             var commitResponse = await client.GetFromJsonAsync<List<Commits>>(branchCommits);
             
             if(commitResponse == null || commitResponse?.Count == 0) continue;
 
-            Branch branch = new Branch { Name = pr.Head.Ref, MergedAt = pr.MergedAt.Value };
-            branch.CreatedAt = commitResponse.OrderBy(c=>c.Commit.Committer.Date).FirstOrDefault().Commit.Committer.Date;
-            branch.NrOfCommits = commitResponse.Count;
+            Branch branch = new Branch { Name = pr.Head.Ref, MergedAt = pr.MergedAt.Value, NrOfCommits = commitResponse.Count };
+            
+            var oldestCommit = commitResponse?.OrderBy(c=>c.Commit.Committer.Date).FirstOrDefault();
+            
+            if(oldestCommit != null)
+            {
+                branch.CreatedAt = oldestCommit.Commit.Committer.Date;               
+            }
+            
             branches.Add(branch);
         }
         return new BranchViewModel { Branches = branches };
