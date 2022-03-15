@@ -15,7 +15,7 @@ public class BranchLifeSpanTests
     [Fact]
     public void TestCommitDataModel()
     {
-        var json = GetJsonFile(@".\CommitData.json");
+        var json = GetJsonFile(@"CommitData.json");
 
         var result = JsonConvert.DeserializeObject<List<Commits>>(json);
 
@@ -28,7 +28,7 @@ public class BranchLifeSpanTests
     [Fact]
     public void TestPRDataModel()
     {
-        var json = GetJsonFile(@".\PRData.json");
+        var json = GetJsonFile(@"PRData.json");
 
         var result = JsonConvert.DeserializeObject<List<PullRequest>>(json);
 
