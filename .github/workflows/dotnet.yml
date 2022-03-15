@@ -18,10 +18,10 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      working-directory: ./Service
-      run: dotnet restore github-branch-lifetime.csproj
+      working-directory: ./Tests
+      run: dotnet restore 
     - name: Build
-      working-directory: ./Service
+      working-directory: ./Tests
       run: dotnet build --no-restore
     - name: Test
       working-directory: ./Tests
