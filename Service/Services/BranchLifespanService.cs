@@ -18,8 +18,7 @@ public class BranchLifespanService
 
         var model = await CreateBranchViewModel(client, prResponse);
 
-        model.AverageBranchLifespanInDaysTotal = model.Branches.Average(x=>x.AgeInDays);
-        model.AverageBranchLifespanInDaysLast3Months = model.Branches.Where(b=>b.CreatedAt>=DateTime.Now.AddMonths(-3)).Average(x=>x.AgeInDays);
+        model.AverageLifespanInDaysTotal = model.Branches.Average(x=>x.AgeInDays);        
 
         return model;
     }

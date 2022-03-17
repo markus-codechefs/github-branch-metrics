@@ -9,22 +9,31 @@
 
 <h2>Immoscout24 Branch Lifespan</h2>
 
-<br/>
+<br />
 <div class="row">
-  <div class="col-sm-2">
-      <Card Title = "Ave. Lifespan Total" Text=@model?.AverageBranchLifespanInDaysTotal.ToString("0.####") />
+    <div class="col-sm-2">
+        <Card Title="Ave. Lifespan Total" Text=@model?.AverageLifespanInDaysTotal.ToString("0.####") />
     </div>
-  <div class="col-sm-2">
-      <Card  Title = "Ave. Lifespan last 3 Mt." Text=@model?.AverageBranchLifespanInDaysLast3Months.ToString("0.####") />
+    <div class="col-sm-2">
+        <Card Title="Ave. Commits" Text=@model?.AverageCommits.ToString() />
+    </div>
+    <div class="col-sm-2">
+        <Card Title="Ave. Additions" Text=@model?.AverageAdditions.ToString() />
+    </div>
+    <div class="col-sm-2">
+        <Card Title="Ave. Deletions" Text=@model?.AverageDeletions.ToString() />
+    </div>
+    <div class="col-sm-2">
+        <Card Title="Ave. Changed Files" Text=@model?.AverageChangedFiles.ToString() />
     </div>
 </div>
-<br/>
+<br />
 
-@if(model == null)
+@if (model == null)
 {
     <p><em>Loading...</em></p>
 }
-else if(model.Branches.Count == 0)
+else if (model.Branches.Count == 0)
 {
     <p><em>No branches exist...</em></p>
 }
@@ -34,9 +43,9 @@ else
         <thead>
             <tr>
                 <th>Branch Name</th>
-                <th>CreatedAt</th>   
-                <th>MergedAt</th>          
-                <th>Branch age (in days)</th>          
+                <th>CreatedAt</th>
+                <th>MergedAt</th>
+                <th>Branch age (in days)</th>
                 <th># of commits</th>
                 <th>Additions</th>
                 <th>Deletions</th>
@@ -47,14 +56,14 @@ else
             @foreach (var branch in model.Branches)
             {
                 <tr>
-                    <td>@branch.Name</td>                    
-                    <td>@branch.CreatedAt</td>                    
+                    <td>@branch.Name</td>
+                    <td>@branch.CreatedAt</td>
                     <td>@branch.MergedAt</td>
                     <td>@branch.AgeInDays.ToString("0.####")</td>
                     <td>@branch.NrOfCommits</td>
-                    <td>@branch.Additions</td>                    
-                    <td>@branch.Deletions</td>                    
-                    <td>@branch.ChangedFiles</td>                    
+                    <td>@branch.Additions</td>
+                    <td>@branch.Deletions</td>
+                    <td>@branch.ChangedFiles</td>
                 </tr>
             }
         </tbody>
@@ -62,7 +71,15 @@ else
 }
 
 @code {
-    private BranchViewModel? model = new BranchViewModel{Branches = new List<Branch>{new Branch{AgeInDays=0.000613445641}}, AverageBranchLifespanInDaysLast3Months = 1, AverageBranchLifespanInDaysTotal = 0.5};
+    private BranchViewModel? model = new BranchViewModel
+    {
+        Branches = new List<Branch> { new Branch { AgeInDays = 0.000613445641 } },
+        AverageCommits = 10,
+        AverageAdditions = 100,
+        AverageDeletions = 88,
+        AverageChangedFiles = 5,
+        AverageLifespanInDaysTotal = 0.5
+    };
 
     protected override async Task OnInitializedAsync()
     {
