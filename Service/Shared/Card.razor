@@ -1,0 +1,13 @@
+<div class="card">  
+  <div class="card-body">
+    <h3 class="card-title">@Title</h3>
+    <h3 class="card-text">@Text</h3>    
+  </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = "";
+    [Parameter]
+    public string Text { get; set; } = "";
+}

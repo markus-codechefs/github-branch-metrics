@@ -7,7 +7,18 @@
 
 <h1>Average Branch Lifespan</h1>
 
-<p>Immoscout24 Branch Lifespan</p>
+<h2>Immoscout24 Branch Lifespan</h2>
+
+<br/>
+<div class="row">
+  <div class="col-sm-2">
+      <Card Title = "Ave. Lifespan Total" Text=@model?.AverageBranchLifespanInDaysTotal.ToString("0.####") />
+    </div>
+  <div class="col-sm-2">
+      <Card  Title = "Ave. Lifespan last 3 Mt." Text=@model?.AverageBranchLifespanInDaysLast3Months.ToString("0.####") />
+    </div>
+</div>
+<br/>
 
 @if(model == null)
 {
@@ -51,7 +62,7 @@ else
 }
 
 @code {
-    private BranchViewModel? model;
+    private BranchViewModel? model = new BranchViewModel{Branches = new List<Branch>{new Branch{AgeInDays=0.000613445641}}, AverageBranchLifespanInDaysLast3Months = 1, AverageBranchLifespanInDaysTotal = 0.5};
 
     protected override async Task OnInitializedAsync()
     {
