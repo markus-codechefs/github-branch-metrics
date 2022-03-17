@@ -1,12 +1,14 @@
+using Microsoft.Extensions.Options;
+
 namespace github_branch_lifetime.Data;
 
 public class BranchLifespanService
 {
     private readonly ApiSettings ApiSettings;
 
-    public BranchLifespanService(ApiSettings apiSettings)
+    public BranchLifespanService(IOptions<ApiSettings> apiSettings)
     {
-        this.ApiSettings = apiSettings;
+        this.ApiSettings = apiSettings.Value;
     }
 
     public async Task<BranchViewModel> GetCurrentBranchLifespan()
@@ -16,7 +18,7 @@ public class BranchLifespanService
         HttpClient client = new HttpClient();
         client.BaseAddress = new Uri(ApiSettings.BaseAddress);
         client.DefaultRequestHeaders.Add("User-Agent", "Markus Trachsel");
-        if(!string.IsNullOrEmpty(ApiSettings.ApiKey)) client.DefaultRequestHeaders.Add("Authorization", "Bearer " + ApiSettings.ApiKey);
+        if (!string.IsNullOrEmpty(ApiSettings.ApiKey)) client.DefaultRequestHeaders.Add("Authorization", "Bearer " + ApiSettings.ApiKey);
 
         var prResponse = await client.GetFromJsonAsync<List<PullRequest>>(PULLS);
 
@@ -57,7 +59,7 @@ public class BranchLifespanService
             }
 
             branch.AgeInDays = (branch.MergedAt - branch.CreatedAt).TotalDays;
-            
+
             var prDetailsResponse = await client.GetFromJsonAsync<PullRequestDetails>(PRDetails);
 
             if (prDetailsResponse == null) continue;

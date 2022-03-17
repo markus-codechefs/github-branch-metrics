@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System;
 using System.Net.Http.Json;
+using Microsoft.Extensions.Options;
 
 namespace BranchLifeSpanTests;
 
 public class BranchLifeSpanTests
 {
     private readonly ApiSettings ApiSettings = new ApiSettings();
-   
+
     [Fact]
     public void TestCommitDataModel()
     {
@@ -43,8 +44,15 @@ public class BranchLifeSpanTests
     [Fact]
     public async Task TestBranchLifespanService()
     {
-        var settings = new ApiSettings { ApiKey = "", BaseAddress = "https://api.github.com/repos/", Organisation = "markus-codechefs", Repositories = new List<string>() { "github-branch-lifetime" } };
-        BranchLifespanService service = new BranchLifespanService(settings);
+        var apiSettingsOption = Options.Create(new ApiSettings
+        {
+            ApiKey = "",
+            BaseAddress = "https://api.github.com/repos/",
+            Organisation = "markus-codechefs",
+            Repositories = new List<string>() { "github-branch-lifetime" }
+        });
+
+        BranchLifespanService service = new BranchLifespanService(apiSettingsOption);
 
         var data = await service.GetCurrentBranchLifespan();
 

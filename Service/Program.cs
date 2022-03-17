@@ -7,8 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<BranchLifespanService>();
-builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
+builder.Services.AddBranchlifetimeConnector(builder.Configuration);
 
 var app = builder.Build();
 
