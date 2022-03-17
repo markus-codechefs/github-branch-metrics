@@ -5,81 +5,106 @@
 @using github_branch_lifetime.Data
 @inject BranchLifespanService BranchLifespanService
 
-<h1>Average Branch Lifespan</h1>
-
-<h2>Immoscout24 Branch Lifespan</h2>
-
-<br />
-<div class="row">
-    <div class="col-sm-2">
-        <Card Title="Ave. Lifespan Total" Text=@model?.AverageLifespanInDaysTotal.ToString("0.####") />
-    </div>
-    <div class="col-sm-2">
-        <Card Title="Ave. Commits" Text=@model?.AverageCommits.ToString() />
-    </div>
-    <div class="col-sm-2">
-        <Card Title="Ave. Additions" Text=@model?.AverageAdditions.ToString() />
-    </div>
-    <div class="col-sm-2">
-        <Card Title="Ave. Deletions" Text=@model?.AverageDeletions.ToString() />
-    </div>
-    <div class="col-sm-2">
-        <Card Title="Ave. Changed Files" Text=@model?.AverageChangedFiles.ToString() />
-    </div>
-</div>
-<br />
+<h1>Average branch lifespan per repository</h1>
 
 @if (model == null)
 {
     <p><em>Loading...</em></p>
 }
-else if (model.Branches.Count == 0)
-{
-    <p><em>No branches exist...</em></p>
-}
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Branch Name</th>
-                <th>CreatedAt</th>
-                <th>MergedAt</th>
-                <th>Branch age (in days)</th>
-                <th># of commits</th>
-                <th>Additions</th>
-                <th>Deletions</th>
-                <th>Changed files</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var branch in model.Branches)
-            {
-                <tr>
-                    <td>@branch.Name</td>
-                    <td>@branch.CreatedAt</td>
-                    <td>@branch.MergedAt</td>
-                    <td>@branch.AgeInDays.ToString("0.####")</td>
-                    <td>@branch.NrOfCommits</td>
-                    <td>@branch.Additions</td>
-                    <td>@branch.Deletions</td>
-                    <td>@branch.ChangedFiles</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @foreach (var repository in model.Repositories)
+    {
+        @if (repository.Branches.Count == 0)
+        {
+            <p><em>No Branches</em></p>
+        }
+        else
+        {
+            <h2>@repository.Name Branch Lifespan</h2>
+
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <Card Title="Ave. Lifespan Total" Text=@repository.AverageLifespanInDaysTotal.ToString("0.####") />
+                </div>
+                <div class="col-sm-2">
+                    <Card Title="Ave. Commits" Text=@repository.AverageCommits.ToString() />
+                </div>
+                <div class="col-sm-2">
+                    <Card Title="Ave. Additions" Text=@repository.AverageAdditions.ToString() />
+                </div>
+                <div class="col-sm-2">
+                    <Card Title="Ave. Deletions" Text=@repository.AverageDeletions.ToString() />
+                </div>
+                <div class="col-sm-2">
+                    <Card Title="Ave. Changed Files" Text=@repository.AverageChangedFiles.ToString() />
+                </div>
+            </div>
+            <br />
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Branch Name</th>
+                        <th>CreatedAt</th>
+                        <th>MergedAt</th>
+                        <th>Branch age (in days)</th>
+                        <th># of commits</th>
+                        <th>Additions</th>
+                        <th>Deletions</th>
+                        <th>Changed files</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var branch in repository.Branches)
+                    {
+                        <tr>
+                            <td>@branch.Name</td>
+                            <td>@branch.CreatedAt</td>
+                            <td>@branch.MergedAt</td>
+                            <td>@branch.AgeInDays.ToString("0.####")</td>
+                            <td>@branch.CommitCount</td>
+                            <td>@branch.Additions</td>
+                            <td>@branch.Deletions</td>
+                            <td>@branch.ChangedFiles</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+
 }
 
 @code {
-    private BranchViewModel? model = new BranchViewModel
+    private RepositoryViewModel model = new RepositoryViewModel
     {
-        Branches = new List<Branch> { new Branch { AgeInDays = 0.000613445641 } },
-        AverageCommits = 10,
-        AverageAdditions = 100,
-        AverageDeletions = 88,
-        AverageChangedFiles = 5,
-        AverageLifespanInDaysTotal = 0.5
+        Repositories = new List<Repositories>
+        {
+            new Repositories
+            {
+                Branches = new List<Branch> { new Branch { AgeInDays = 0.000613445641, CreatedAt = new DateTime(2022,01,01), MergedAt = new DateTime(2022,02,01), Name = "Branch1" } },
+                AverageCommits = 10,
+                AverageAdditions = 100,
+                AverageDeletions = 88,
+                AverageChangedFiles = 5,
+                AverageLifespanInDaysTotal = 0.5,
+                Name = "github-branch-lifespan"
+            },
+            new Repositories
+            {
+                Branches = new List<Branch> { new Branch { AgeInDays = 6, CreatedAt = new DateTime(2022,03,01), MergedAt = new DateTime(2022,04,01), Name = "Branch2" } },
+                AverageCommits = 10,
+                AverageAdditions = 100,
+                AverageDeletions = 88,
+                AverageChangedFiles = 5,
+                AverageLifespanInDaysTotal = 0.5,
+                Name = "some-other-repo"
+            }
+        }
     };
+
 
     protected override async Task OnInitializedAsync()
     {

@@ -11,29 +11,26 @@ public class BranchLifespanService
         this.ApiSettings = apiSettings.Value;
     }
 
-    public async Task<BranchViewModel> GetCurrentBranchLifespan()
+    public async Task<RepositoryViewModel?> GetCurrentBranchLifespan()
     {
         string PULLS = $"{ApiSettings.Organisation}/{ApiSettings.Repositories[0]}/pulls?state=all&base=master";
 
         HttpClient client = new HttpClient();
         client.BaseAddress = new Uri(ApiSettings.BaseAddress);
         client.DefaultRequestHeaders.Add("User-Agent", "Markus Trachsel");
+
         if (!string.IsNullOrEmpty(ApiSettings.ApiKey)) client.DefaultRequestHeaders.Add("Authorization", "Bearer " + ApiSettings.ApiKey);
 
         var prResponse = await client.GetFromJsonAsync<List<PullRequest>>(PULLS);
 
-        if (prResponse == null || prResponse?.Count == 0) return new BranchViewModel();
+        if (prResponse == null || prResponse?.Count == 0) return new RepositoryViewModel();
 
-        var model = await CreateBranchViewModel(client, prResponse);
-
-        model.AverageLifespanInDaysTotal = model.Branches.Average(x => x.AgeInDays);
-
-        return model;
+        return await CreateRepositoryViewModel(client, prResponse);
     }
 
-    private async Task<BranchViewModel> CreateBranchViewModel(HttpClient client, List<PullRequest>? prData)
+    private async Task<RepositoryViewModel> CreateRepositoryViewModel(HttpClient client, List<PullRequest>? prData)
     {
-        if (prData == null) return new BranchViewModel();
+        if (prData == null) return new RepositoryViewModel();
 
         List<Branch> branches = new List<Branch>();
 
@@ -64,12 +61,26 @@ public class BranchLifespanService
 
             if (prDetailsResponse == null) continue;
 
-            branch.NrOfCommits = prDetailsResponse.Commits;
+            branch.CommitCount = prDetailsResponse.Commits;
             branch.Additions = prDetailsResponse.Additions;
             branch.Deletions = prDetailsResponse.Deletions;
             branch.ChangedFiles = prDetailsResponse.ChangedFiles;
         }
 
-        return new BranchViewModel { Branches = branches };
+        return new RepositoryViewModel
+        {
+            Repositories = new List<Repositories>
+            {
+                new Repositories
+                {
+                    Branches = branches, 
+                    AverageLifespanInDaysTotal = branches.Average(x => x.AgeInDays),
+                    AverageAdditions = branches.Average(x=>x.Additions),
+                    AverageDeletions = branches.Average(x=>x.Deletions),
+                    AverageCommits = branches.Average(x=>x.CommitCount),
+                    AverageChangedFiles = branches.Average(x=>x.ChangedFiles)
+                }
+            }
+        };
     }
 }

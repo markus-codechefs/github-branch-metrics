@@ -10,7 +10,7 @@ public class Branch
     public DateTime MergedAt { get; set; }
     public string Name { get; set; }   
     public double AgeInDays { get; set; }   
-    public int NrOfCommits { get; set; }
+    public int CommitCount { get; set; }
     public int Additions { get; set; }
     public int Deletions { get; set; }
     public int ChangedFiles { get; set; }
