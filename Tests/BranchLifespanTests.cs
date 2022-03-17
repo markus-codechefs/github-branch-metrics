@@ -12,6 +12,8 @@ namespace BranchLifeSpanTests;
 
 public class BranchLifeSpanTests
 {
+    private readonly ApiSettings ApiSettings = new ApiSettings();
+   
     [Fact]
     public void TestCommitDataModel()
     {
@@ -41,7 +43,8 @@ public class BranchLifeSpanTests
     [Fact]
     public async Task TestBranchLifespanService()
     {
-        BranchLifespanService service = new BranchLifespanService();
+        var settings = new ApiSettings { ApiKey = "", BaseAddress = "https://api.github.com/repos", Organisation = "markus-codechefs", Repositories = new List<string>() { "github-branch-lifetime" } };
+        BranchLifespanService service = new BranchLifespanService(settings);
 
         var data = await service.GetCurrentBranchLifespan();
 
@@ -83,6 +86,17 @@ public class BranchLifeSpanTests
         Assert.NotNull(result);
         Assert.Equal("0.0006", result);
     }
+
+    [Fact]
+    public void TestApiSettings()
+    {
+        Assert.NotNull(this.ApiSettings);
+        Assert.NotEmpty(this.ApiSettings.ApiKey);
+        Assert.NotEmpty(this.ApiSettings.Organisation);
+        Assert.False(this.ApiSettings.Repositories.Count == 0);
+        Assert.NotEmpty(this.ApiSettings.BaseAddress);
+    }
+
 
     private string GetJsonFile(string fileName)
     {

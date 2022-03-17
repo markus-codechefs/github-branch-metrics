@@ -2,15 +2,21 @@ namespace github_branch_lifetime.Data;
 
 public class BranchLifespanService
 {
+    private readonly ApiSettings ApiSettings;
+
+    public BranchLifespanService(ApiSettings apiSettings)
+    {
+        this.ApiSettings = apiSettings;
+    }
+
     public async Task<BranchViewModel> GetCurrentBranchLifespan()
     {
-        const string BASE_ADDRESS = "https://api.github.com";
-        const string PULLS = "repos/markus-codechefs/github-branch-lifetime/pulls?state=all&base=master";
-
+        string PULLS = $"{ApiSettings.Organisation}/{ApiSettings.Repositories[0]}/pulls?state=all&base=master";
 
         HttpClient client = new HttpClient();
-        client.BaseAddress = new Uri(BASE_ADDRESS);
-        client.DefaultRequestHeaders.Add("User-Agent", "markus-codechefs");
+        client.BaseAddress = new Uri(ApiSettings.BaseAddress);
+        client.DefaultRequestHeaders.Add("User-Agent", "Markus Trachsel");
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + ApiSettings.ApiKey);
 
         var prResponse = await client.GetFromJsonAsync<List<PullRequest>>(PULLS);
 
@@ -18,7 +24,7 @@ public class BranchLifespanService
 
         var model = await CreateBranchViewModel(client, prResponse);
 
-        model.AverageLifespanInDaysTotal = model.Branches.Average(x=>x.AgeInDays);        
+        model.AverageLifespanInDaysTotal = model.Branches.Average(x => x.AgeInDays);
 
         return model;
     }
@@ -27,19 +33,19 @@ public class BranchLifespanService
     {
         if (prData == null) return new BranchViewModel();
 
-        string COMMITS = "repos/markus-codechefs/github-branch-lifetime/pulls/{0}/commits";
-        string PR = "repos/markus-codechefs/github-branch-lifetime/pulls/{0}";
         List<Branch> branches = new List<Branch>();
 
         foreach (var pr in prData)
         {
             if (pr.Draft || !pr.MergedAt.HasValue || pr.MergedAt.Equals(DateTime.MinValue)) continue;
 
+            string COMMITS = $"{ApiSettings.Organisation}/{ApiSettings.Repositories[0]}/pulls/{pr.Number}/commits";
+            string PRDetails = $"{ApiSettings.Organisation}/{ApiSettings.Repositories[0]}/pulls/{pr.Number}";
+
             Branch branch = new Branch { Name = pr.Head.Ref, MergedAt = pr.MergedAt.Value };
             branches.Add(branch);
 
-            var branchCommits = string.Format(COMMITS, pr.Number);
-            var commitResponse = await client.GetFromJsonAsync<List<Commits>>(branchCommits);
+            var commitResponse = await client.GetFromJsonAsync<List<Commits>>(COMMITS);
 
             if (commitResponse == null || commitResponse?.Count == 0) continue;
 
@@ -50,10 +56,9 @@ public class BranchLifespanService
                 branch.CreatedAt = oldestCommit.Commit.Committer.Date;
             }
 
-            branch.AgeInDays = (branch.MergedAt - branch.CreatedAt).TotalDays;            
-
-            var prDetails = string.Format(PR, pr.Number);
-            var prDetailsResponse = await client.GetFromJsonAsync<PullRequestDetails>(prDetails);
+            branch.AgeInDays = (branch.MergedAt - branch.CreatedAt).TotalDays;
+            
+            var prDetailsResponse = await client.GetFromJsonAsync<PullRequestDetails>(PRDetails);
 
             if (prDetailsResponse == null) continue;
 
