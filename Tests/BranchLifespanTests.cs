@@ -43,7 +43,7 @@ public class BranchLifeSpanTests
     [Fact]
     public async Task TestBranchLifespanService()
     {
-        var settings = new ApiSettings { ApiKey = "", BaseAddress = "https://api.github.com/repos", Organisation = "markus-codechefs", Repositories = new List<string>() { "github-branch-lifetime" } };
+        var settings = new ApiSettings { ApiKey = "", BaseAddress = "https://api.github.com/repos/", Organisation = "markus-codechefs", Repositories = new List<string>() { "github-branch-lifetime" } };
         BranchLifespanService service = new BranchLifespanService(settings);
 
         var data = await service.GetCurrentBranchLifespan();

@@ -16,7 +16,7 @@ public class BranchLifespanService
         HttpClient client = new HttpClient();
         client.BaseAddress = new Uri(ApiSettings.BaseAddress);
         client.DefaultRequestHeaders.Add("User-Agent", "Markus Trachsel");
-        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + ApiSettings.ApiKey);
+        if(!string.IsNullOrEmpty(ApiSettings.ApiKey)) client.DefaultRequestHeaders.Add("Authorization", "Bearer " + ApiSettings.ApiKey);
 
         var prResponse = await client.GetFromJsonAsync<List<PullRequest>>(PULLS);
 
