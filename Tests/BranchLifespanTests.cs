@@ -90,11 +90,13 @@ public class BranchLifeSpanTests
     [Fact]
     public void TestApiSettings()
     {
-        Assert.NotNull(this.ApiSettings);
-        Assert.NotEmpty(this.ApiSettings.ApiKey);
-        Assert.NotEmpty(this.ApiSettings.Organisation);
-        Assert.False(this.ApiSettings.Repositories.Count == 0);
-        Assert.NotEmpty(this.ApiSettings.BaseAddress);
+        var settings = new ApiSettings { ApiKey = "1", BaseAddress = "https://api.github.com/repos/", Organisation = "markus-codechefs", Repositories = new List<string>() { "github-branch-lifetime" } };
+
+        Assert.NotNull(settings);
+        Assert.NotEmpty(settings.ApiKey);
+        Assert.NotEmpty(settings.Organisation);
+        Assert.False(settings.Repositories.Count == 0);
+        Assert.NotEmpty(settings.BaseAddress);
     }
 
 
