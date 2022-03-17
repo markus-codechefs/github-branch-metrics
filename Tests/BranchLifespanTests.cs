@@ -45,7 +45,7 @@ public class BranchLifeSpanTests
 
         var data = await service.GetCurrentBranchLifespan();
 
-        Assert.NotNull(data);        
+        Assert.NotNull(data);
     }
 
     [Fact]
@@ -57,7 +57,7 @@ public class BranchLifeSpanTests
         var response = await client.GetFromJsonAsync<List<PullRequest>>("repos/markus-codechefs/github-branch-lifetime/pulls?state=all&base=master");
 
         Assert.NotNull(response);
-        Assert.True(response?.Count > 0);        
+        Assert.True(response?.Count > 0);
     }
 
     [Fact]
@@ -70,6 +70,18 @@ public class BranchLifeSpanTests
 
         Assert.NotNull(response);
         Assert.True(response?.Count > 0);
+    }
+
+    [Fact]
+    public void TestStringFormatting()
+    {
+        Branch branch = new Branch { AgeInDays = 0.00061073073073 };
+
+        var result = branch.AgeInDays.ToString("0.####");
+
+        Assert.NotEmpty(result);
+        Assert.NotNull(result);
+        Assert.Equal("0.0006", result);
     }
 
     private string GetJsonFile(string fileName)
