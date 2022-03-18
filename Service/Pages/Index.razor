@@ -108,6 +108,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        model = await BranchLifespanService.GetCurrentBranchLifespan();
+        model = await BranchLifespanService.GetCurrentBranchLifespan() ?? new RepositoryViewModel();
     }
 }
