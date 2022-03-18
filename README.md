@@ -1,7 +1,7 @@
 # Github branch lifetime measurmenet tool
-A client which calls the github api to query branch creation and merge date.
+A blazor app which calls the github api to query branch creation and merge date. And evaluates the lifetime in days of branches in each repository specified.  
 
-![image](https://user-images.githubusercontent.com/62404942/157924438-46408e11-dbe0-4323-a686-6bd1fd95c66f.png)
+![image](https://user-images.githubusercontent.com/62404942/159014939-7ad85291-7e39-4b69-b4af-217a15f1372e.png)
 
 ## Statsistics Logic
 There is no branch creation date in github as a branch is merely a pointer to a commit. So the most sane thing I came up with was the oldest commit on a branch.
@@ -9,11 +9,13 @@ There is no branch creation date in github as a branch is merely a pointer to a 
 #### Get all Pull Requests
 https://api.github.com/repos/markus-codechefs/github-branch-lifetime/pulls
 
-- Use the MergedAt date as the end date of the measurement.
-- Enable the client to set a date how far back Pull Requests should be considered.
+
+- Uses the MergedAt date as the end date of the measurement.
 
 #### Get all commits per Pull Request
-https://api.github.com/repos/markus-codechefs/github-branch-lifetime/pulls/5/commits
+https://api.github.com/repos/{org}/{repo}/pulls/{PR.Number}/commits
 
-- Use the CreatedAt Date for the start of the statistic. 
-- Loop through each PR's commits and pick the oldest. 
+- Uses CreatedAt of the oldest commit on a branch for the start of the measurement.
+
+## CI Data
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=markus-codechefs_github-branch-lifetime&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=markus-codechefs_github-branch-lifetime)
