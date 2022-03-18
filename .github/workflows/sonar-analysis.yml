@@ -1,4 +1,4 @@
-name: Build
+name: Sonar Analysis
 on:
   push:
     branches:
@@ -39,10 +39,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.0.x
-      - name: Restore dependencies
-        working-directory: ./Tests
-        run: dotnet restore      
+          dotnet-version: 6.0.x     
       - name: Build and analyze
         working-directory: ./Tests
         env:
