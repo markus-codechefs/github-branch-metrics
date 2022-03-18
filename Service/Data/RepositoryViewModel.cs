@@ -4,9 +4,11 @@ public class RepositoryViewModel
     public RepositoryViewModel()
     {
         Repositories = new List<Repositories>();
+        BranchesConsideredInStatistic = "";
     }
 
     public List<Repositories> Repositories { get; set; }
+    public string BranchesConsideredInStatistic { get; set; }
 }
 
 public class Repositories
