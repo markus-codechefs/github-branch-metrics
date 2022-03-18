@@ -11,9 +11,9 @@ public class BranchLifespanService
         this.ApiSettings = apiSettings.Value;
     }
 
-    public async Task<RepositoryViewModel?> GetCurrentBranchLifespan()
+    public async Task<RepositoryViewModel?> GetCurrentRepositoryBranchLifespan()
     {
-        string PULLS = $"{ApiSettings.Organisation}/{ApiSettings.Repositories[0]}/pulls?state=all&base=master";
+        string PULLS = $"{ApiSettings.Organisation}/{ApiSettings.Repositories[0]}/pulls?state=closed&base=master";
 
         HttpClient client = new HttpClient();
         client.BaseAddress = new Uri(ApiSettings.BaseAddress);

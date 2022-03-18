@@ -16,9 +16,6 @@ public class PullRequest
     [JsonPropertyName("updated_at")]
     public DateTime UpdatedAt { get; set; }
 
-    [JsonPropertyName("closed_at")]
-    public DateTime ClosedAt { get; set; }
-
     [JsonPropertyName("merged_at")]
     public DateTime? MergedAt { get; set; }
     public Head Head { get; set; }
