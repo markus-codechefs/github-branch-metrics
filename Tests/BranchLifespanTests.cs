@@ -49,12 +49,13 @@ public class BranchLifeSpanTests
             ApiKey = "",
             BaseAddress = "https://api.github.com/repos/",
             Organisation = "markus-codechefs",
+            PageSizePerRepo = "2",
             Repositories = new List<string>() { "github-branch-lifetime" }
         });
 
         BranchLifespanService service = new BranchLifespanService(apiSettingsOption);
 
-        var data = await service.GetCurrentBranchLifespan();
+        var data = await service.GetCurrentRepositoryBranchLifespan();
 
         Assert.NotNull(data);
     }
@@ -98,7 +99,7 @@ public class BranchLifeSpanTests
     [Fact]
     public void TestApiSettings()
     {
-        var settings = new ApiSettings { ApiKey = "1", BaseAddress = "https://api.github.com/repos/", Organisation = "markus-codechefs", Repositories = new List<string>() { "github-branch-lifetime" } };
+        var settings = new ApiSettings { ApiKey = "1", BaseAddress = "https://api.github.com/repos/", Organisation = "markus-codechefs", Repositories = new List<string>() { "github-branch-lifetime" },  PageSizePerRepo = "2" };
 
         Assert.NotNull(settings);
         Assert.NotEmpty(settings.ApiKey);

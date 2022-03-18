@@ -6,6 +6,7 @@ public class ApiSettings
         ApiKey = "";
         Organisation = "";
         BaseAddress = "";
+        PageSizePerRepo = "";
         Repositories = new List<string>();
     }
 
@@ -13,4 +14,5 @@ public class ApiSettings
     public string Organisation { get; set; }
     public string BaseAddress { get; set; }
     public List<string> Repositories { get; set; }
+    public string PageSizePerRepo { get; set; }
 }
