@@ -1,4 +1,4 @@
-name: Build project, run tests, code scanning
+name: Tests and CodeQL
 
 on:
   push:
