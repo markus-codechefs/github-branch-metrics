@@ -6,6 +6,7 @@
 
 ## CI
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=markus-codechefs_github-branch-lifetime&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=markus-codechefs_github-branch-lifetime)
+![example workflow](https://github.com/markus-codechefs/github-branch-lifetime/actions/workflows/build.yml/badge.svg)
 
 ## Short summary
 A blazor app which calls the github api to query branch creation and merge date. And evaluates the lifetime in days of branches in each repository specified.  
