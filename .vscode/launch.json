@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/net6.0/github-branch-lifetime.dll",
+            "program": "${workspaceFolder}/Service/bin/Debug/net6.0/github-branch-lifetime.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

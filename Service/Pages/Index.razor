@@ -78,11 +78,11 @@ else
 }
 
 @code {
-    private RepositoryViewModel model = new RepositoryViewModel
+    private RepositoriesViewModel model = new RepositoriesViewModel
     {
-        Repositories = new List<Repositories>
+        Repositories = new List<Repository>
         {
-            new Repositories
+            new Repository
             {
                 Branches = new List<Branch> { new Branch { AgeInDays = 0.000613445641, CreatedAt = new DateTime(2022,01,01), MergedAt = new DateTime(2022,02,01), Name = "Branch1" } },
                 AverageCommits = 10,
@@ -92,7 +92,7 @@ else
                 AverageLifespanInDaysTotal = 0.5,
                 Name = "github-branch-lifespan"
             },
-            new Repositories
+            new Repository
             {
                 Branches = new List<Branch> { new Branch { AgeInDays = 6, CreatedAt = new DateTime(2022,03,01), MergedAt = new DateTime(2022,04,01), Name = "Branch2" } },
                 AverageCommits = 10,
@@ -108,6 +108,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        model = await BranchLifespanService.GetCurrentRepositoryBranchLifespan() ?? new RepositoryViewModel();
+        model = await BranchLifespanService.GetCurrentRepositoryBranchLifespan() ?? new RepositoriesViewModel();
     }
 }

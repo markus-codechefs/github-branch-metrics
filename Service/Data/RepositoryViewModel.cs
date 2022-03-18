@@ -1,19 +1,19 @@
 namespace github_branch_lifetime.Data;
-public class RepositoryViewModel
+public class RepositoriesViewModel
 {
-    public RepositoryViewModel()
+    public RepositoriesViewModel()
     {
-        Repositories = new List<Repositories>();
+        Repositories = new List<Repository>();
         BranchesConsideredInStatistic = "";
     }
 
-    public List<Repositories> Repositories { get; set; }
+    public List<Repository> Repositories { get; set; }
     public string BranchesConsideredInStatistic { get; set; }
 }
 
-public class Repositories
+public class Repository
 {
-    public Repositories()
+    public Repository()
     {
         Name = "";
         Branches = new List<Branch>();

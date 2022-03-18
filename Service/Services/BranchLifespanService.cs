@@ -11,26 +11,40 @@ public class BranchLifespanService
         this.ApiSettings = apiSettings.Value;
     }
 
-    public async Task<RepositoryViewModel?> GetCurrentRepositoryBranchLifespan()
+    public string GetApiSettings()
     {
-        string PULLS = $"{ApiSettings.Organisation}/{ApiSettings.Repositories[0]}/pulls?state=closed&base=master";
+        return this.ApiSettings.ApiKey + this.ApiSettings.BaseAddress + this.ApiSettings.Organisation + this.ApiSettings.PageSizePerRepo + this.ApiSettings.Repositories.First();
+    }
+    public async Task<RepositoriesViewModel?> GetCurrentRepositoryBranchLifespan()
+    {
+        var model = new RepositoriesViewModel();
 
-        HttpClient client = new HttpClient();
-        client.BaseAddress = new Uri(ApiSettings.BaseAddress);
-        client.DefaultRequestHeaders.Add("User-Agent", "Markus Trachsel");
+        foreach (var repo in ApiSettings.Repositories)
+        {
+            string PULLS = $"{ApiSettings.Organisation}/{repo}/pulls?state=closed&base=master&per_page={ApiSettings.PageSizePerRepo}";
 
-        if (!string.IsNullOrEmpty(ApiSettings.ApiKey)) client.DefaultRequestHeaders.Add("Authorization", "Bearer " + ApiSettings.ApiKey);
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(ApiSettings.BaseAddress);
+            client.DefaultRequestHeaders.Add("User-Agent", "Markus Trachsel");
 
-        var prResponse = await client.GetFromJsonAsync<List<PullRequest>>(PULLS);
+            if (!string.IsNullOrEmpty(ApiSettings.ApiKey)) client.DefaultRequestHeaders.Add("Authorization", "Bearer " + ApiSettings.ApiKey);
 
-        if (prResponse == null || prResponse?.Count == 0) return new RepositoryViewModel();
+            var prResponse = await client.GetFromJsonAsync<List<PullRequest>>(PULLS);
 
-        return await CreateRepositoryViewModel(client, prResponse);
+            if (prResponse == null || prResponse?.Count == 0) return new RepositoriesViewModel();
+
+            var repository = await CreateRepositoryViewModel(client, prResponse);
+            repository.Name = repo;
+
+            model.Repositories.Add(repository);
+        }
+
+        return model;
     }
 
-    private async Task<RepositoryViewModel> CreateRepositoryViewModel(HttpClient client, List<PullRequest>? prData)
+    private async Task<Repository> CreateRepositoryViewModel(HttpClient client, List<PullRequest>? prData)
     {
-        if (prData == null) return new RepositoryViewModel();
+        if (prData == null) return new Repository();
 
         List<Branch> branches = new List<Branch>();
 
@@ -67,20 +81,14 @@ public class BranchLifespanService
             branch.ChangedFiles = prDetailsResponse.ChangedFiles;
         }
 
-        return new RepositoryViewModel
+        return new Repository
         {
-            Repositories = new List<Repositories>
-            {
-                new Repositories
-                {
-                    Branches = branches, 
-                    AverageLifespanInDaysTotal = branches.Average(x => x.AgeInDays),
-                    AverageAdditions = branches.Average(x=>x.Additions),
-                    AverageDeletions = branches.Average(x=>x.Deletions),
-                    AverageCommits = branches.Average(x=>x.CommitCount),
-                    AverageChangedFiles = branches.Average(x=>x.ChangedFiles)
-                }
-            }
+            Branches = branches,
+            AverageLifespanInDaysTotal = branches.Average(x => x.AgeInDays),
+            AverageAdditions = branches.Average(x => x.Additions),
+            AverageDeletions = branches.Average(x => x.Deletions),
+            AverageCommits = branches.Average(x => x.CommitCount),
+            AverageChangedFiles = branches.Average(x => x.ChangedFiles)
         };
     }
 }
