@@ -1,5 +1,4 @@
-name: Tests and CodeQL
-
+name: Tests
 on:
   push:
     branches: [ master ]
