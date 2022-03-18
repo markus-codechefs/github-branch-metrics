@@ -1,4 +1,4 @@
-name: Build project
+name: Build project, run tests, code scanning
 
 on:
   push:
