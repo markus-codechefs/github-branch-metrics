@@ -12,7 +12,7 @@
 ## Short summary
 A blazor app which calls the github api to query branch creation and merge date. And evaluates the lifetime in days of branches in each repository specified.  
 
-![image](https://user-images.githubusercontent.com/62404942/159014939-7ad85291-7e39-4b69-b4af-217a15f1372e.png)
+![image](https://user-images.githubusercontent.com/62404942/159183736-49460ecd-e855-4049-9f82-2f55bb2eb7be.png)
 
 ## How is this achieved?
 There is no branch creation date in github as a branch is merely a pointer to a commit. So the most sane thing I came up with was the oldest commit on a branch.
