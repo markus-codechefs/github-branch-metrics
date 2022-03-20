@@ -78,7 +78,7 @@ else
 }
 
 @code {
-    private RepositoriesViewModel model = new RepositoriesViewModel
+    private RepositoryViewModel model = new RepositoryViewModel
     {
         Repositories = new List<Repository>
         {
@@ -108,6 +108,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        model = await BranchLifespanService.GetCurrentRepositoryBranchLifespan() ?? new RepositoriesViewModel();
+        model = await BranchLifespanService.GetCurrentRepositoryBranchLifespan() ?? new RepositoryViewModel();
     }
 }

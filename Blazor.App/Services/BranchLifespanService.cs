@@ -15,9 +15,9 @@ public class BranchLifespanService
     {
         return this.ApiSettings.ApiKey + this.ApiSettings.BaseAddress + this.ApiSettings.Organisation + this.ApiSettings.PageSizePerRepo + this.ApiSettings.Repositories.First();
     }
-    public async Task<RepositoriesViewModel?> GetCurrentRepositoryBranchLifespan()
+    public async Task<RepositoryViewModel?> GetCurrentRepositoryBranchLifespan()
     {
-        var model = new RepositoriesViewModel();
+        var model = new RepositoryViewModel();
 
         foreach (var repo in ApiSettings.Repositories)
         {
@@ -31,7 +31,7 @@ public class BranchLifespanService
 
             var prResponse = await client.GetFromJsonAsync<List<PullRequest>>(PULLS);
 
-            if (prResponse == null || prResponse?.Count == 0) return new RepositoriesViewModel();
+            if (prResponse == null || prResponse?.Count == 0) return new RepositoryViewModel();
 
             var repository = await CreateRepositoryViewModel(client, prResponse);
             repository.Name = repo;

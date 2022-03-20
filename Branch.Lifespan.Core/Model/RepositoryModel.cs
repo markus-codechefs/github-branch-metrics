@@ -1,8 +1,8 @@
-namespace github_branch_lifetime.Data;
+namespace Branch.Lifespan.Core.Model;
 
-public class RepositoryViewModel
+public class RepositoryModel
 {
-    public RepositoryViewModel()
+    public RepositoryModel()
     {
         Repositories = new List<Repository>();
         BranchesConsideredInStatistic = "";
