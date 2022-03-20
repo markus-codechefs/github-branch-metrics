@@ -96,19 +96,6 @@ public class BranchLifeSpanTests
         Assert.Equal("0.0006", result);
     }
 
-    [Fact]
-    public void TestApiSettings()
-    {
-        var settings = new ApiSettings { ApiKey = "1", BaseAddress = "https://api.github.com/repos/", Organisation = "markus-codechefs", Repositories = new List<string>() { "github-branch-lifetime" },  PageSizePerRepo = "2" };
-
-        Assert.NotNull(settings);
-        Assert.NotEmpty(settings.ApiKey);
-        Assert.NotEmpty(settings.Organisation);
-        Assert.False(settings.Repositories.Count == 0);
-        Assert.NotEmpty(settings.BaseAddress);
-    }
-
-
     private static string GetJsonFile(string fileName)
     {
         return File.ReadAllText(fileName);
