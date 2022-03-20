@@ -10,11 +10,21 @@
 ![example workflow](https://github.com/markus-codechefs/github-branch-lifetime/actions/workflows/codeql-analysis.yml/badge.svg)
 
 ## Short summary
-A blazor app which calls the github api to query branch creation and merge date. And evaluates the lifetime in days of branches in each repository specified.  
+A base package will offer the statistic to display for other apps. A blazor app and a console app are offered as examples. They will call the package which then calls the github api to query the branch statistics.  
+
+## Why is branch lifespan important?
+Data from the book "Accelerate" and "State of DevOps Report" have shown that consistently merging code to trunk (repository main branch) multiple times a day delivers high performance in technology organizations. 
+
+https://techbeacon.com/app-dev-testing/how-trunk-based-delivery-key-faster-more-reliable-software
+
+At the time of writing I have not found any library which offers to measure the amount of time spent developing on non-trunk branches. Measuring the lifespan of your organisation's feature branches will give insight into:
+  - the state of software delivery in general
+  - the average batch size being delivered 
+  - the average lead time to deliver a feature 
 
 ![image](https://user-images.githubusercontent.com/62404942/159183736-49460ecd-e855-4049-9f82-2f55bb2eb7be.png)
 
-## How is this achieved?
+## Some context
 There is no branch creation date in github as a branch is merely a pointer to a commit. So the most sane thing I came up with was the oldest commit on a branch.
 
 #### Get all Pull Requests
