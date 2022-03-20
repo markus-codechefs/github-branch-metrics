@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Service/github-branch-lifetime.csproj",
+                "${workspaceFolder}/Blazor.App/github-branch-lifetime.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Service/github-branch-lifetime.csproj",
+                "${workspaceFolder}/Blazor.App/github-branch-lifetime.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/Service/github-branch-lifetime.csproj"
+                "${workspaceFolder}/Blazor.App/github-branch-lifetime.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
