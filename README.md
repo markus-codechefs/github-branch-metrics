@@ -13,7 +13,7 @@
 A base package will offer the statistic to display for other apps. A blazor app and a console app are offered as examples. They will call the package which then calls the github api to query the branch statistics.  
 
 ## Why is branch lifespan important?
-Data from the book "Accelerate" and "State of DevOps Report" have shown that consistently merging code to trunk (repository main branch) multiple times a day delivers high performance in technology organizations. 
+Data from the book ["Accelerate"](https://www.amazon.com/Accelerate-Software-Performing-Technology-Organizations/dp/1942788339) and ["State of DevOps Report"](https://cloud.google.com/blog/products/devops-sre/announcing-dora-2021-accelerate-state-of-devops-report) have shown that consistently merging code to trunk (repository main branch) multiple times a day delivers high performance in technology organizations. 
 
 https://techbeacon.com/app-dev-testing/how-trunk-based-delivery-key-faster-more-reliable-software
 
