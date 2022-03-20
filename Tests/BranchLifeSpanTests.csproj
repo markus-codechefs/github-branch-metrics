@@ -19,7 +19,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../Service/github-branch-lifetime.csproj"/>
+    <ProjectReference Include="../Blazor.App/github-branch-lifetime.csproj"/>
   </ItemGroup>
   <ItemGroup>
     <None Update="PRData.json">
