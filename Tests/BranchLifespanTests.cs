@@ -109,7 +109,7 @@ public class BranchLifeSpanTests
     }
 
 
-    private string GetJsonFile(string fileName)
+    private static string GetJsonFile(string fileName)
     {
         return File.ReadAllText(fileName);
     }
