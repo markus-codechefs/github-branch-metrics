@@ -11,9 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Harden Runner
+      uses: step-security/harden-runner@9b0655f430fba8c7001d4e38f8d4306db5c6e0ab # v1
+      with:
+        egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
+    - uses: actions/checkout@629c2de402a417ea7690ca6ce3f33229e27606a5 # v2
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@608ee757cfcce72c2e91e99aca128e0cae67de87 # v1
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
@@ -27,7 +32,7 @@ jobs:
     - name: set pr build number
       id: PRNUMBER
       if: ${{ github.event_name == 'pull_request' }}
-      uses: kkak10/pr-number-action@v1.3
+      uses: kkak10/pr-number-action@8f5358941366822cd0825e04dfe68437f2f5f15b # v1.3
 
       # set report file and title 
     - name: Set Test Title
@@ -46,7 +51,7 @@ jobs:
       
       # upload report as build artifact
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
       if: ${{always()}}
       with:
         name: 'Test Run'
@@ -54,7 +59,7 @@ jobs:
       
       # add report as PR comment (if PR)
     - name: comment PR
-      uses: machine-learning-apps/pr-comment@1.0.0
+      uses: machine-learning-apps/pr-comment@78e77cd435e0f9706512ea294d846058ae46f7ff # 1.0.0
       if: ${{ github.event_name == 'pull_request' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
