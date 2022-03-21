@@ -3,6 +3,7 @@
 [![GitHub release](https://img.shields.io/github/release/markus-codechefs/github-branch-lifetime?include_prereleases=&sort=semver&color=blue)](https://github.com/markus-codechefs/github-branch-lifetime/releases/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
 [![issues - github-branch-lifetime](https://img.shields.io/github/issues/markus-codechefs/github-branch-lifetime)](https://github.com/markus-codechefs/github-branch-lifetime/issues)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/5723/badge)](https://bestpractices.coreinfrastructure.org/projects/5723)
 
 ## CI
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=markus-codechefs_github-branch-lifetime&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=markus-codechefs_github-branch-lifetime)
