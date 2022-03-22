@@ -4,7 +4,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-permissions: read-all
+permissions: read-all|write-all
 jobs:
   build:
 
@@ -58,8 +58,8 @@ jobs:
         path: ${{github.workspace}}/${{env.file_name}}
       
       # add report as PR comment (if PR)
-    - name: comment PR
-      uses: machine-learning-apps/pr-comment@78e77cd435e0f9706512ea294d846058ae46f7ff # 1.0.0
+    - name: comment PR      
+      uses: machine-learning-apps/pr-comment@78e77cd435e0f9706512ea294d846058ae46f7ff # 1.0.0    
       if: ${{ github.event_name == 'pull_request' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
