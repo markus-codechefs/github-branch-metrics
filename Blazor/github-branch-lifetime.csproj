@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>github_branch_lifetime</RootNamespace>
     <UserSecretsId>5cd5e170-2ed8-400b-8904-7e5ed31bdd37</UserSecretsId>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>

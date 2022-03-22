@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="LiquidTestReports.Markdown" Version="1.0.9"/>
@@ -19,7 +20,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../Blazor.App/github-branch-lifetime.csproj"/>
+    <ProjectReference Include="../Blazor/github-branch-lifetime.csproj"/>
   </ItemGroup>
   <ItemGroup>
     <None Update="PRData.json">
