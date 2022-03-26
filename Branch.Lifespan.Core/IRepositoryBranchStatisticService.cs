@@ -4,5 +4,5 @@ namespace Branch.Lifespan.Core;
 
 public interface IRepositoryBranchStatisticService
 {
-    RepositoryModel GetStatistics(ApiSettings settings);
+    Task<RepositoryModel> GetStatistics();
 }
