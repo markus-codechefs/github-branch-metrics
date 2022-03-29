@@ -77,4 +77,14 @@ public class BranchLifespanCoreTests
 
         var result = Assert.Throws<ArgumentException>(() =>  new RepositoryBranchStatisticService(settings));
     }
+
+    [Fact]
+    public void TestGetStatisticsWithNoPageSize()
+    {
+        var settings = new ApiSettings { ApiKey = "1", UserAgent="Markus-Trachsel", BaseAddress = "https://api.github.com/repos/", Organisation = "markus-codechefs", Repositories = new List<string>() { "github-branch-lifetime" } };
+
+        IRepositoryBranchStatisticService statisticsService = new RepositoryBranchStatisticService(settings);        
+
+        var result = Assert.ThrowsAsync<InvalidOperationException>(async () => await statisticsService.GetStatistics());
+    }
 }
