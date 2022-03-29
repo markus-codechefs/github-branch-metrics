@@ -33,4 +33,24 @@ public class BranchLifespanCoreTests
         
         var result = Assert.ThrowsAsync<InvalidOperationException>(async () => await statisticsService.GetStatistics());
     }
+
+    [Fact]
+    public void TestGetStatisticsWithNoApiKey()
+    {
+        var settings = new ApiSettings { ApiKey = "", UserAgent="Markus-Trachsel", BaseAddress = "https://api.github.com/repos/", Organisation = "markus-codechefs", Repositories = new List<string>() { "github-branch-lifetime" },  PageSizePerRepo = "2" };
+
+        IRepositoryBranchStatisticService statisticsService = new RepositoryBranchStatisticService(settings);
+        
+        var result = Assert.ThrowsAsync<InvalidOperationException>(async () => await statisticsService.GetStatistics());
+    }
+
+    [Fact]
+    public void TestGetStatisticsWithNoApiKeyAndNoUserAgent()
+    {
+        var settings = new ApiSettings { ApiKey = "", UserAgent="", BaseAddress = "https://api.github.com/repos/", Organisation = "markus-codechefs", Repositories = new List<string>() { "github-branch-lifetime" },  PageSizePerRepo = "2" };
+
+        IRepositoryBranchStatisticService statisticsService = new RepositoryBranchStatisticService(settings);
+        
+        var result = Assert.ThrowsAsync<InvalidOperationException>(async () => await statisticsService.GetStatistics());
+    }
 }
